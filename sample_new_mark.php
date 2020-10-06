@@ -23,20 +23,21 @@ if ( ! $args['_terms'] ) {
 ?>
 
 <?php foreach ( $args['_terms'] as $_term ) : ?>
-	<?php
-    $_now_date = date_i18n( 'U' );
+<?php
+	$_new_days = 3;
+	$_now_date = date_i18n( 'U' );
 	$_post_date = date_i18n( 'U', strtotime( get_post()->post_date ) );
 	$_range_date = date( 'U', ( $_now_date - $_post_date ) ) / 86400;
-    if ( 40 >= $_range_date ) {
+	if ( $_new_days >= $_range_date ) {
 ?>
 		<span class="c-entry-summary__term">新着記事（NEW）</span>
 <?php
-} else {
+	} else {
 ?>
 <span class="c-entry-summary__term c-entry-summary__term--<?php echo esc_attr( $_term->taxonomy . '-' . $_term->term_id ); ?>">
 	<?php echo esc_html( $_term->name ); ?>
 </span>
 <?php
-}
+	}
 ?>
 <?php endforeach; ?>
